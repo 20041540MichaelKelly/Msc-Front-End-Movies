@@ -11,7 +11,7 @@ import Menu from "@mui/material/Menu";
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { supabase } from "../../supabaseClient";
+// import { supabase } from "../../supabaseClient";
 import MovieIcon from '@mui/icons-material/Movie';
 import PortraitIcon from '@mui/icons-material/Portrait';
 import LiveTvIcon from '@mui/icons-material/LiveTv';
@@ -245,7 +245,7 @@ const SiteHeader = () => {
               <IconButton
                 key="Sign Out"
                 sx={{color:"white"}}
-                onClick={() => supabase.auth.signOut()} >
+                 >
                 <LogoutIcon />Sign Out</IconButton>
             </>
           )}

@@ -10,6 +10,7 @@ import MoviePlaylistPage from "./pages/moviePlaylistPage";
 import MovieReviewPage from "./pages/movieReviewPage";
 import MoviesContextProvider from "./contexts/moviesContext";
 import ActorsContextProvider from "./contexts/actorsContext";
+import AuthContextProvider from "./contexts/authContext";
 import AddMovieReviewPage from './pages/addMovieReviewPage';
 import UpcomingMoviesPage from './pages/upcomingMoviesPage';
 import MostPopularMoviesPage from './pages/mostPopularMoviesPage';
@@ -46,6 +47,7 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
+      <AuthContextProvider>
         <MoviesContextProvider>
           <ActorsContextProvider>
             <TvShowContextProvider>
@@ -88,6 +90,7 @@ const App = () => {
             </TvShowContextProvider>
           </ActorsContextProvider>
         </MoviesContextProvider>
+        </AuthContextProvider>
       </BrowserRouter>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>

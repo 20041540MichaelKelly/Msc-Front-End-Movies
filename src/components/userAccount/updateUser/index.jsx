@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { supabase } from '../../../supabaseClient';
+// import { supabase } from '../../../supabaseClient';
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -17,30 +17,30 @@ export default function UpdateUser() {
     const [email, setEmail] = useState('')
     const [user, setUser] = useState([])
 
-    useEffect(() => {
-        (async () => {
-          const { data: { user } } = await supabase.auth.getUser()
-          setUser(user);
-        })();
-    })
+    // useEffect(() => {
+    //     (async () => {
+    //       const { data: { user } } = await supabase.auth.getUser()
+    //       setUser(user);
+    //     })();
+    // })
 
     const handleUpdate = async (event) => {
         event.preventDefault()
 
         const formData = new FormData(event.currentTarget);
 
-        const { data, error } = await supabase.auth.updateUser(        
-        {
-                email: formData.get("email"),
-                password: formData.get("password"),
-                options: {
-                    data: {
-                        first_name: formData.get("firstName"),
-                        last_name: formData.get("last_name")
-                    }
-                }
-            }
-        )
+        // const { data, error } = await supabase.auth.updateUser(        
+        // {
+        //         email: formData.get("email"),
+        //         password: formData.get("password"),
+        //         options: {
+        //             data: {
+        //                 first_name: formData.get("firstName"),
+        //                 last_name: formData.get("last_name")
+        //             }
+        //         }
+        //     }
+        // )
 
         if (error) {
             alert(error.message)

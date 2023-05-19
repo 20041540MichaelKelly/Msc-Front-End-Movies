@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { supabase } from '../../supabaseClient';
+// import { supabase } from '../../supabaseClient';
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -26,10 +26,10 @@ export default function Auth() {
 
    const formData = new FormData(event.currentTarget);
   
-  const { data: validEmails, error, isError, isLoading } = await supabase.auth.signInWithPassword({
-    email: formData.get("email"),
-    password: formData.get("password"),
-  })
+  // const { data: validEmails, error, isError, isLoading } = await supabase.auth.signInWithPassword({
+  //   email: formData.get("email"),
+  //   password: formData.get("password"),
+  // })
 
     if (error) {
         alert(error.message)

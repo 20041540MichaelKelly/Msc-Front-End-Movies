@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import PageTemplate from '../components/fantasyMovie/templateFantasyListPage'
 import Spinner from "../components/spinner";
-import { supabase } from "../supabaseClient";
+// import { supabase } from "../supabaseClient";
 
 const MostPopularMoviesPage = (props) => {
     //   const { page } = useParams();
@@ -11,20 +11,20 @@ const MostPopularMoviesPage = (props) => {
 
 
     const fetchFantasyMovies = async () => {
-        const { data, error, isLoading } = await supabase
-            .from('fantasy_movies')
-            .select()
+        // const { data, error, isLoading } = await supabase
+        //     .from('fantasy_movies')
+        //     .select()
 
-        if (isLoading) {
-            return <Spinner />;
-        }
+        // if (isLoading) {
+        //     return <Spinner />;
+        // }
 
-        if (error) {
-            setErrorHappened(true);
-            setErrorMessage(error.message)
-        } else {
-            setFantasy(data)
-        }
+        // if (error) {
+        //     setErrorHappened(true);
+        //     setErrorMessage(error.message)
+        // } else {
+        //     setFantasy(data)
+        // }
     }
 
 

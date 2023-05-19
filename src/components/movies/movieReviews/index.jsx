@@ -8,7 +8,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { Link } from "react-router-dom";
 import { excerpt } from "../../../util";
-import { supabase } from "../../../supabaseClient";
+// import { supabase } from "../../../supabaseClient";
 
 const styles = {
   table: {
@@ -19,14 +19,14 @@ const styles = {
 export default function MovieReviews({ movie }) {
   const [reviews, setReviews] = useState([]);
 
-  const fetchReviews = async () => {
-    const { data } = await supabase
-    .from('reviews')
-    .select()
-    .eq('movieId', movie.id)
+//   const fetchReviews = async () => {
+//     const { data } = await supabase
+//     .from('reviews')
+//     .select()
+//     .eq('movieId', movie.id)
 
-    setReviews(data)
-}
+//     setReviews(data)
+// }
 
   useEffect(() => {
     fetchReviews()

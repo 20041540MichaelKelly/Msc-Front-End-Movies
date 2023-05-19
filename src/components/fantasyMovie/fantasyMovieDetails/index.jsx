@@ -8,7 +8,7 @@ import NavigationIcon from "@mui/icons-material/Navigation";
 import Fab from "@mui/material/Fab";
 import { useNavigate } from "react-router-dom";
 import Card from "@mui/material/Card";
-import { supabase } from "../../../supabaseClient";
+// import { supabase } from "../../../supabaseClient";
 import CardMedia from "@mui/material/CardMedia";
 
 const styles = {
@@ -44,7 +44,7 @@ const FantasyMovieDetails = ({ movie }) => {
 
     const imageUrl = movie.image ? movie.image.split('\\').pop() : ""; //double dash becuse it thinks it an escape if not
 
-    const { data: image_url } = supabase.storage.from("images").getPublicUrl(imageUrl);
+    // const { data: image_url } = supabase.storage.from("images").getPublicUrl(imageUrl);
 
     return (
         <>

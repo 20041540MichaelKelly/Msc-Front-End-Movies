@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { supabase } from '../../../supabaseClient';
+// import { supabase } from '../../../supabaseClient';
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -71,18 +71,18 @@ export default function TemplateFantasyMoviePage() {
 
     const formData = new FormData(event.currentTarget);
 
-    const { error, loading } = await supabase.from("fantasy_movies")
-      .insert(
-        {
-          title: formData.get("title"),
-          run_time: formData.get("time"),
-          genres: formData.get("genres"),
-          production_companys: formData.get("productionCompany"),
-          overview: formData.get("overview"),
-          date: date,
-          image: imageUrl
-        }
-      )
+    // const { error, loading } = await supabase.from("fantasy_movies")
+    //   .insert(
+    //     {
+    //       title: formData.get("title"),
+    //       run_time: formData.get("time"),
+    //       genres: formData.get("genres"),
+    //       production_companys: formData.get("productionCompany"),
+    //       overview: formData.get("overview"),
+    //       date: date,
+    //       image: imageUrl
+    //     }
+    //   )
 
 
     if (error) {

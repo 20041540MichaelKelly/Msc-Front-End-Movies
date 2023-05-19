@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import MovieDetails from "../components/fantasyMovie/fantasyMovieDetails";
 import PageTemplate from "../components/fantasyMovie/fantasyTemplate";
 import Spinner from '../components/spinner';
-import { supabase } from '../supabaseClient';
+// import { supabase } from '../supabaseClient';
 
 const FantasyMovieDetailsPage = () => {
   const { id } = useParams();
@@ -14,22 +14,22 @@ const FantasyMovieDetailsPage = () => {
 
 
     const fetchFantasyMovies = async () => {
-        const { data, error, isLoading } =  await supabase
-            .from('fantasy_movies')
-            .select()
-            .eq('id', id)
+        // const { data, error, isLoading } =  await supabase
+        //     .from('fantasy_movies')
+        //     .select()
+        //     .eq('id', id)
 
-        if (isLoading) {
-            return <Spinner />;
-        }
+        // if (isLoading) {
+        //     return <Spinner />;
+        // }
 
-        if (error) {
-            setErrorHappened(true);
-            setErrorMessage(error.message)
-            throw error
-        } else {
-            setFantasy(data[0])
-        }
+        // if (error) {
+        //     setErrorHappened(true);
+        //     setErrorMessage(error.message)
+        //     throw error
+        // } else {
+        //     setFantasy(data[0])
+        // }
     }
 
 

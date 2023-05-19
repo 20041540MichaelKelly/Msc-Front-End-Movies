@@ -13,7 +13,7 @@ import img from '../../../images/film-poster-placeholder.png'
 import { useNavigate } from "react-router-dom";
 import Box from '@mui/material/Box';
 import ReusableStyles from "../../../reusableStyles";
-import { supabase } from "../../../supabaseClient";
+// import { supabase } from "../../../supabaseClient";
 
 const styles = {
 
@@ -32,7 +32,7 @@ export default function FantasyMovieCard({ movie }) {
 
      const imageUrl = movie.image ? movie.image.split('\\').pop() : ""; //double dash becuse it thinks it an escape if not
 
-    const { data: image_url } = supabase.storage.from("images").getPublicUrl(imageUrl);
+    // const { data: image_url } = supabase.storage.from("images").getPublicUrl(imageUrl);
 
     return (
         <Card sx={ReusableStyles.cardHover}>

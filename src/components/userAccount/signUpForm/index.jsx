@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { supabase } from '../../../supabaseClient';
+// import { supabase } from '../../../supabaseClient';
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -37,17 +37,17 @@ export default function SignUp() {
 
     const formData = new FormData(event.currentTarget);
 
-    const { data: validateEmail} = await supabase
-      .from('profiles')
-      .select()
-      .eq('email', formData.get("email"))
+    // const { data: validateEmail} = await supabase
+    //   .from('profiles')
+    //   .select()
+    //   .eq('email', formData.get("email"))
 
-      if(validateEmail.length > 0) {
-        setErrorMessage("The Email entered already exists");
-        setErrorHappened(true);
-      }else{
-        handleSubmit(formData)
-      }
+    //   if(validateEmail.length > 0) {
+    //     setErrorMessage("The Email entered already exists");
+    //     setErrorHappened(true);
+    //   }else{
+    //     handleSubmit(formData)
+    //   }
   }
 
   const handleSubmit = async (formData) => {
@@ -63,7 +63,7 @@ export default function SignUp() {
           }
         }
       }
-    )
+    // )
       
     if (error) {
       setErrorHappened(true)

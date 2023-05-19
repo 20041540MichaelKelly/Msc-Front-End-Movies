@@ -10,7 +10,7 @@ import styles from "./styles";
 import ratings from "./ratingCategories";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
-import { supabase } from "../../supabaseClient";
+// import { supabase } from "../../supabaseClient";
 import { makeStyles } from "@material-ui/core/styles";
 import { IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
@@ -73,16 +73,16 @@ const ReviewForm = ({ movie }) => {
     navigate(`/movies/${movie.id}`);
   };
 
- const addRatings = async (formData)=> {
-  const { error} =  await supabase.from("reviews")
-  .insert(
-    {
-      movieId: movie.id,
-      rating: formData.get("rating"),
-      content: formData.get("content"),
-      author: formData.get("author"),
-    }
-  ) 
+  const addRatings = async (formData)=> {
+//   const { error} =  await supabase.from("reviews")
+//   .insert(
+//     {
+//       movieId: movie.id,
+//       rating: formData.get("rating"),
+//       content: formData.get("content"),
+//       author: formData.get("author"),
+//     }
+//   ) 
  
 if (error) {
   throw error
@@ -96,15 +96,15 @@ if (error) {
     event.preventDefault()
 
     const formData = new FormData(event.currentTarget);
-    const { error} =  await supabase.from("reviews")
-    .insert(
-      {
-        movieId: movie.id,
-        rating: formData.get("rating"),
-        content: formData.get("content"),
-        author: formData.get("author"),
-      }
-    ) 
+    // const { error} =  await supabase.from("reviews")
+    // .insert(
+    //   {
+    //     movieId: movie.id,
+    //     rating: formData.get("rating"),
+    //     content: formData.get("content"),
+    //     author: formData.get("author"),
+    //   }
+    // ) 
    
   if (error) {
     throw error
