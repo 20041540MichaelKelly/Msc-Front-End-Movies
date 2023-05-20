@@ -28,7 +28,7 @@ export const login = (email, password) => {
 };
 
 /**
- * Movies Section
+ * ******************Movies Section************************
  * @returns 
  */
 
@@ -150,16 +150,17 @@ export const getMoviesNowPlaying = (args) => {
     `/api/movies/now_playing`, {
     headers: {
       'Authorization': window.localStorage.getItem('token')
-    }}).then((response) => {
-      if (!response.ok) {
-        throw new Error(response.json().message);
-      }
-      return response.json();
-    })
+    }
+  }).then((response) => {
+    if (!response.ok) {
+      throw new Error(response.json().message);
+    }
+    return response.json();
+  })
     .catch((error) => {
-       throw error
+      throw error
     });
-  };
+};
 
 export const getPopularMovies = (args) => {
   const [, pagePart] = args.queryKey;
@@ -169,32 +170,55 @@ export const getPopularMovies = (args) => {
     `/api/movies/popular`, {
     headers: {
       'Authorization': window.localStorage.getItem('token')
-    }}).then((response) => {
-      if (!response.ok) {
-        throw new Error(response.json().message);
-      }
-      return response.json();
-    })
+    }
+  }).then((response) => {
+    if (!response.ok) {
+      throw new Error(response.json().message);
+    }
+    return response.json();
+  })
     .catch((error) => {
-       throw error
+      throw error
     });
-  };
+};
 
-  export const getMovieCredits = ( args ) => {
-    const [, idPart] = args.queryKey;
-    const { id } = idPart;
-    return fetch(
-      `/api/movies/${id}/credits`, {
-      headers: {
-        'Authorization': window.localStorage.getItem('token')
-      }}).then((response) => {
-        if (!response.ok) {
-          throw new Error(response.json().message);
-        }
-        return response.json();
-      })
-      .catch((error) => {
-         throw error
-      });
-    };
+export const getMovieCredits = (args) => {
+  const [, idPart] = args.queryKey;
+  const { id } = idPart;
+  return fetch(
+    `/api/movies/${id}/credits`, {
+    headers: {
+      'Authorization': window.localStorage.getItem('token')
+    }
+  }).then((response) => {
+    if (!response.ok) {
+      throw new Error(response.json().message);
+    }
+    return response.json();
+  })
+    .catch((error) => {
+      throw error
+    });
+};
+
+export const getSimilarMovies = (args) => {
+  return fetch(
+    `/api/movies/${id}/similar`, {
+    headers: {
+      'Authorization': window.localStorage.getItem('token')
+    }
+  }).then((response) => {
+    if (!response.ok) {
+      throw new Error(response.json().message);
+    }
+    return response.json();
+  })
+    .catch((error) => {
+      throw error
+    });
+};
+
+/**
+ * ***********People*********************************
+ */
 
