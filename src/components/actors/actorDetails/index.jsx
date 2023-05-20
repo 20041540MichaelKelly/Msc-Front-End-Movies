@@ -1,7 +1,7 @@
 import React from "react";
 import { useQuery } from "react-query";
 import Typography from "@mui/material/Typography";
-import { getActorCredits } from "../../../api/tmdb-api";
+import { getActorCredits } from "../../../api/movie-api";
 import Spinner from "../../spinner";
 import Card from "@mui/material/Card";
 import ImageList from "@mui/material/ImageList";

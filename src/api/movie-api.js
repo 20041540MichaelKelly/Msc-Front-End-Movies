@@ -222,3 +222,219 @@ export const getSimilarMovies = (args) => {
  * ***********People*********************************
  */
 
+export const getActors = (args) => {
+  const [, pagePart] = args.queryKey;
+  const { page } = pagePart;
+  page ? page : 1;
+  return fetch(
+    `/api/person/popular`, {
+    headers: {
+      'Authorization': window.localStorage.getItem('token')
+    }
+  }).then((response) => {
+    if (!response.ok) {
+      throw new Error(response.json().message);
+    }
+    return response.json();
+  })
+    .catch((error) => {
+      throw error
+    });
+};
+
+export const getActor = (args) => {
+  const [, idPart] = args.queryKey;
+  const { id } = idPart;
+  return fetch(
+    `/api/person/${id}`, {
+    headers: {
+      'Authorization': window.localStorage.getItem('token')
+    }
+  }
+  ).then((res) => res.json());
+};
+
+export const getActorCredits = (args) => {
+  const [, idPart] = args.queryKey;
+  const { id } = idPart;
+  return fetch(
+    `/api/person/${id}/movie_credits`, {
+    headers: {
+      'Authorization': window.localStorage.getItem('token')
+    }
+  }
+  ).then((response) => {
+    if (!response.ok) {
+      throw new Error(response.json().message);
+    }
+    return response.json();
+
+  })
+    .catch((error) => {
+      throw error
+    });
+};
+
+export const getActorImages = (args) => {
+  const [, idPart] = args.queryKey;
+  const { id } = idPart;
+  return fetch(
+    `/api/person/${id}/images`, {
+    headers: {
+      'Authorization': window.localStorage.getItem('token')
+    }
+  }
+  ).then((response) => {
+    if (!response.ok) {
+      throw new Error(response.json().message);
+    }
+    return response.json();
+
+  })
+    .catch((error) => {
+      throw error
+    });
+};
+
+/*----------------Tv Shows--------------------------*/
+
+export const getTvShows = (args) => {
+  const [, pagePart] = args.queryKey;
+  const { page } = pagePart;
+  page ? page : 1;
+  return fetch(
+    `/api/tv`, {
+    headers: {
+      'Authorization': window.localStorage.getItem('token')
+    }
+  }
+  ).then((response) => {
+    if (!response.ok) {
+      throw new Error(response.json().message);
+    }
+    return response.json();
+
+  })
+    .catch((error) => {
+      throw error
+    });
+};
+
+export const getTvShow = (args) => {
+  const [, idPart] = args.queryKey;
+  const { id } = idPart;
+  return fetch(
+    `/api/tv/${id}`, {
+    headers: {
+      'Authorization': window.localStorage.getItem('token')
+    }
+  }
+  ).then((response) => {
+    if (!response.ok) {
+      throw new Error(response.json().message);
+    }
+    return response.json();
+
+  })
+    .catch((error) => {
+      throw error
+    });
+};
+
+export const getTvShowImages = (args) => {
+  const [, idPart] = args.queryKey;
+  const { id } = idPart;
+  return fetch(
+    `/api/tv/${id}/images`, {
+    headers: {
+      'Authorization': window.localStorage.getItem('token')
+    }
+  }
+  ).then((response) => {
+    if (!response.ok) {
+      throw new Error(response.json().message);
+    }
+    return response.json();
+
+  })
+    .catch((error) => {
+      throw error
+    });
+};
+
+
+export const getTvShowCredits = (args) => {
+
+  const [, idPart] = args.queryKey;
+  const { id } = idPart;
+  return fetch(
+    `/api/tv/${id}/credits`, {
+    headers: {
+      'Authorization': window.localStorage.getItem('token')
+    }
+  }
+  ).then((response) => {
+    if (!response.ok) {
+      throw new Error(response.json().message);
+    }
+    return response.json();
+
+  })
+    .catch((error) => {
+      throw error
+    });
+};
+
+export const getTvShowAggregateCredits = (args) => {
+  const [, idPart] = args.queryKey;
+    const { id } = idPart;
+    return fetch(
+      `/api/tv/${id}/aggregate_credits`, {
+      headers: {
+        'Authorization': window.localStorage.getItem('token')
+      }
+    }
+    ).then( (response) => {
+      if (!response.ok) {
+        throw new Error(response.json().message);
+      }
+      return response.json();
+  
+    })
+    .catch((error) => {
+      throw error
+   });
+  };
+ 
+//todo
+export const getSimilarTvShows = ({ queryKey }) => {
+  const [, idPart] = queryKey;
+  const { id } = idPart;
+  return fetch(
+    `https://api.themoviedb.org/3/tv/${id}/similar?api_key=${import.meta.env.VITE_TMDB_KEY}&language=en-US`
+  ).then((response) => {
+    if (!response.ok) {
+      throw new Error(response.json().message);
+    }
+    return response.json();
+  })
+    .catch((error) => {
+      throw error
+    });
+};
+
+export const getTvGenres = async () => {
+  return fetch(
+    "https://api.themoviedb.org/3/genre/tv/list?api_key=" +
+    import.meta.env.VITE_TMDB_KEY +
+    "&language=en-US"
+  ).then((response) => {
+    if (!response.ok) {
+      throw new Error(response.json().message);
+    }
+    return response.json();
+  })
+    .catch((error) => {
+      throw error
+    });
+};

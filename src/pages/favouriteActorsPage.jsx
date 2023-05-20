@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import PageTemplate from "../components/actors/templateActorListPage";
 import { ActorsContext } from "../contexts/actorsContext";
 import { useQueries } from "react-query";
-import { getActor } from "../api/tmdb-api";
+import { getActor } from "../api/movie-api";
 import Spinner from "../components/spinner";
 import RemoveFromFavouriteActors from "../components/cardIcons/removeFromFavouriteActors";
 
