@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useContext, useState } from "react";
 // import { supabase } from '../../supabaseClient';
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -12,30 +12,47 @@ import Container from "@mui/material/Container";
 import ErrorAlert from "../alerts/errorAlert";
 import SuccessAlert from "../alerts/successAlert";
 import Alert from '@mui/material/Alert';
+import { AuthContext } from '../../contexts/authContext';
+import { Navigate } from "react-router-dom";
 
-
-
-export default function Auth() {
+const Auth = props => {
+  const context = useContext(AuthContext)
   const [loading, setLoading] = useState(true)
   const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
   const errorMessage = "";
+
+  const login = () => {
+    context.authenticate(email, password);
+  };
+
+  // Set 'from' to path where browser is redirected after a successful login.
+  // Either / or the protected path user tried to access.
+ // const { from } = props.location.state || { from: { pathname: "/" } };
+
+  if (context.isAuthenticated === true) {
+    return <Navigate to={"/"} />;
+  }
 
 
   const handleSubmit = async (event) => {
     event.preventDefault()
 
    const formData = new FormData(event.currentTarget);
+
+  
   
   // const { data: validEmails, error, isError, isLoading } = await supabase.auth.signInWithPassword({
   //   email: formData.get("email"),
   //   password: formData.get("password"),
   // })
 
-    if (error) {
-        alert(error.message)
-    } 
+  //   if (error) {
+  //       alert(error.message)
+  //   } 
 
-   setLoading(false)
+  //  setLoading(false)
 }
 
   return (
@@ -61,6 +78,9 @@ export default function Auth() {
             name="email"
             autoComplete="email"
             autoFocus
+            onChange={e => {
+              setEmail(e.target.value);
+            }}
           />
           <TextField
             margin="normal"
@@ -71,17 +91,23 @@ export default function Auth() {
             type="password"
             id="password"
             autoComplete="current-password"
+            onChange={e => {
+              setPassword(e.target.value);
+            }}
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
           />
+          {/* <button onClick={login}>Log in</button> */}
+
           <Button
             type="submit"
             fullWidth
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
-          >
+            onClick={login}>
+          
             Sign In
           </Button>
           <Grid container>
@@ -101,3 +127,5 @@ export default function Auth() {
     </Container>
   );
 };
+
+export default Auth;

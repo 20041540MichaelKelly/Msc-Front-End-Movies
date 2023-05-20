@@ -22,7 +22,8 @@ import ActorDetailsPage from './pages/actorDetailsPage';
 import TvShowPage from './pages/tvShowPage';
 import SignUp from './pages/signupPage';
 import PrivateRoute from "./components/privateRoute";
-import Login from "./components/loginTemplate";
+// import Login from "./components/loginTemplate";
+import Login from "./pages/loginPage"
 import TvShowDetails from "./pages/tvShowDetails";
 import SimilarTvShowsPage from "./pages/similarTvShows";
 import FantasyMoviePage from "./pages/fantasyMoviePage";
@@ -54,7 +55,7 @@ const App = () => {
               <Routes>
                 <Route path="/signup" element={<SignUp />} />
                 <Route path="/login" element={<Login />} />
-                 <Route element={<PrivateRoute />  }>
+                 {/* <Route element={<PrivateRoute />  }> */}
                   <Route path="/update" element={<UpdateUser />} />
                   <Route path="/tv/favourites" element={<FavouriteTvShowPage />} />
                   <Route path="/tv/playlist" element={<TvShowPlaylistPage />} />
@@ -80,12 +81,18 @@ const App = () => {
                   <Route path="/movies/upcoming/page/:page" element={<UpcomingMoviesPage />} />
                   <Route path="/movies/popular" element={<MostPopularMoviesPage />} />
                   <Route path="/movies/popular/page/:page" element={<MostPopularMoviesPage />} />
-                  <Route path="/" element={<HomePage />} />
-                  <Route path="/movies/:id" element={<MoviePage />} />
+                  <Route exact path="/" element={<HomePage />} />
+                  <Route path="*" element={<Navigate to="/" />} />                 
+                  <Route path="/movies/:id" element={
+                  <PrivateRoute>
+                    <MoviePage />
+                  </PrivateRoute>}
+            />
+                  {/* <Route path="/movies/:id" element={<MoviePage />} /> */}
                   {/* <Route path="/movies/page/:page" element={<HomePage />} /> */}
                   <Route path="*" element={<Navigate to="/" />} />
                   <Route path="#" element={<Navigate to="/" />} />
-                </Route> 
+                {/* </Route>  */}
               </Routes>
             </TvShowContextProvider>
           </ActorsContextProvider>
