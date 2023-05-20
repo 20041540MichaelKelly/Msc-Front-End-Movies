@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import PageTemplate from "../components/homePageSetup/homePageTemplate";
 import { useQuery } from "react-query";
 import Spinner from "../components/spinner";
-import { getMovies } from "../api/tmdb-api";
+import { getMovies } from "../api/movie-api";
 import useFiltering from "../hooks/useFiltering";
 import AddToFavouritesIcon from '../components/cardIcons/addToFavourites';
 import AddToPlaylistIcon from '../components/cardIcons/addToPlaylist';

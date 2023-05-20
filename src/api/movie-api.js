@@ -202,6 +202,8 @@ export const getMovieCredits = (args) => {
 };
 
 export const getSimilarMovies = (args) => {
+  const [, idPart] = args.queryKey;
+  const { id } = idPart;
   return fetch(
     `/api/movies/${id}/similar`, {
     headers: {
@@ -407,12 +409,15 @@ export const getTvShowAggregateCredits = (args) => {
   };
  
 //todo
-export const getSimilarTvShows = ({ queryKey }) => {
-  const [, idPart] = queryKey;
+export const getSimilarTvShows = (args) => {
+  const [, idPart] = args.queryKey;
   const { id } = idPart;
   return fetch(
-    `https://api.themoviedb.org/3/tv/${id}/similar?api_key=${import.meta.env.VITE_TMDB_KEY}&language=en-US`
-  ).then((response) => {
+    `/api/tv/${id}/similar`, {
+    headers: {
+      'Authorization': window.localStorage.getItem('token')
+    }
+  }).then((response) => {
     if (!response.ok) {
       throw new Error(response.json().message);
     }
@@ -423,18 +428,18 @@ export const getSimilarTvShows = ({ queryKey }) => {
     });
 };
 
-export const getTvGenres = async () => {
-  return fetch(
-    "https://api.themoviedb.org/3/genre/tv/list?api_key=" +
-    import.meta.env.VITE_TMDB_KEY +
-    "&language=en-US"
-  ).then((response) => {
-    if (!response.ok) {
-      throw new Error(response.json().message);
-    }
-    return response.json();
-  })
-    .catch((error) => {
-      throw error
-    });
-};
+// export const getTvGenres = async () => {
+//   return fetch(
+//     "https://api.themoviedb.org/3/genre/tv/list?api_key=" +
+//     import.meta.env.VITE_TMDB_KEY +
+//     "&language=en-US"
+//   ).then((response) => {
+//     if (!response.ok) {
+//       throw new Error(response.json().message);
+//     }
+//     return response.json();
+//   })
+//     .catch((error) => {
+//       throw error
+//     });
+// };

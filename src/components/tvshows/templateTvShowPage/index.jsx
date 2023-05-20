@@ -3,7 +3,7 @@ import TvShowHeader from "../headerTvShowList";
 import Grid from "@mui/material/Grid";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
-import { getTvShowImages } from "../../../api/tmdb-api";
+import { getTvShowImages } from "../../../api/movie-api";
 import { useQuery } from "react-query";
 import Spinner from '../../spinner'
 import ErrorAlert from "../../alerts/errorAlert";
