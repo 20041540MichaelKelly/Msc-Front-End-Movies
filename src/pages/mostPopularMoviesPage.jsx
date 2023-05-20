@@ -1,7 +1,7 @@
 import React, {useEffect} from "react";
 import { useQuery } from "react-query";
 import PageTemplate from '../components/movies/templateMovieListPage'
-import { getPopularMovies } from "../api/tmdb-api";
+import { getPopularMovies } from "../api/movie-api";
 import AddToPlaylistIcon from '../components/cardIcons/addToPlaylist';
 import Spinner from "../components/spinner";
 import useFiltering from "../hooks/useFiltering";

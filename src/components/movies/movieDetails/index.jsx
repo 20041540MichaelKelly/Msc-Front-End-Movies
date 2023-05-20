@@ -10,7 +10,7 @@ import NavigationIcon from "@mui/icons-material/Navigation";
 import Fab from "@mui/material/Fab";
 import Drawer from "@mui/material/Drawer";
 import MovieReviews from '../movieReviews';
-import { getMovieCredits } from "../../../api/tmdb-api";
+import { getMovieCredits } from "../../../api/movie-api";
 import Spinner from '../../spinner';
 import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
@@ -60,9 +60,6 @@ const MovieDetails = ( {movie}) => {
     return <Spinner />;
   }
   
-  if (isError) {
-    return <ErrorAlert message={error.message} />
-  }
 
   const credits = data ? data.cast : [];
 
