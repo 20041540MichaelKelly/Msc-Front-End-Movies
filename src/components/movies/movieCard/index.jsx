@@ -13,6 +13,8 @@ import Grid from "@mui/material/Grid";
 import img from '../../../images/film-poster-placeholder.png'
 import Avatar from "@mui/material/Avatar";
 import { MoviesContext } from "../../../contexts/moviesContext";
+import { AuthContext } from "../../../contexts/authContext";
+
 import { useNavigate } from "react-router-dom";
 import { AvatarGroup } from "@mui/material";
 import Box from '@mui/material/Box';
@@ -29,13 +31,45 @@ const styles = {
 
 export default function MovieCard({ movie, action, actionFav }) {
   const navigate = useNavigate();
- 
+  let favourites= []
   const handleClick = (pageURL) => {
     navigate(pageURL);
   };
   
-  const { favourites, addToFavourites } = useContext(MoviesContext);
+  
+  
+
+   /**
+   * 
+   * Implementation of Favourites
+  //  */
+  
+  //  const addToFavourites = (movie) => {
+  //   let updatedFavourites = [...favourites];
+  //   if (!favourites.includes(movie.id)) {
+  //     updatedFavourites.push(movie.id);
+  //   }
+  //   setFavourites(updatedFavourites);
+  // };
+
+  // // We will use this function in a later section
+  // const removeFromFavourites = (movie) => {
+  //   setFavourites(favourites.filter((mId) => mId !== movie.id));
+  // };
+
+  const context = useContext(AuthContext);
+
+//const { favourites, addToFavourites } = useContext(MoviesContext);
+const getFavourites = async () => {
+  favourites = await context.getFavouriteMovie()
+  
+}
+
+getFavourites();
+
+
   const { playlist, addToPlaylist } = useContext(MoviesContext);
+  
 
   if (favourites.find((id) => id === movie.id)) {
     movie.favourite = true;

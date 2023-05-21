@@ -4,7 +4,7 @@
  * @param {*} password 
  * @param {*} firstName 
  * @param {*} lastName 
- * @returns 
+ * @returns User object
  */
 
 export const signup = (email, password, firstName, lastName) => {
@@ -27,6 +27,53 @@ export const login = (email, password) => {
   }).then(res => res.json())
 };
 
+export const getUserByEmail = (email) => {
+  return fetch(`/api/accounts/${email}`, {
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    method: 'get',
+  }).then(res => res.json())
+};
+
+export const addFavourite = (id, movie) => {
+  return fetch(`/api/accounts/${id}/favourite`, {
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    method: 'post',
+    body: JSON.stringify({ movieId: movie.id })
+  }).then(res => res.json())
+};
+
+export const getFavourites = (id) => {
+  return fetch(`/api/accounts/${id}/favourite`, {
+    headers: {
+      'Content-Type': 'application/json'
+    },
+  }
+  ).then((res) => res.json());
+};
+
+export const addFavouriteTvShow = (id) => {
+  return fetch(`/api/accounts/${id}/favouriteTvShow`, {
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    method: 'post',
+    body: JSON.stringify({ tvShowId: id })
+  }).then(res => res.json())
+};
+
+export const addFavouritePerson = (id) => {
+  return fetch(`/api/accounts/${id}/favouritePerson`, {
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    method: 'post',
+    body: JSON.stringify({ personId: id })
+  }).then(res => res.json())
+};
 /**
  * ******************Movies Section************************
  * @returns 
