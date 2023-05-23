@@ -1,5 +1,62 @@
-import { useState } from 'react';
-// import { supabase } from '../../../supabaseClient';
+// import React, { useContext, useState } from "react";
+// import {Navigate  } from "react-router-dom";
+// import { AuthContext } from '../contexts/authContext';
+
+// const SignUpPage = props => {
+//   const context = useContext(AuthContext)
+//   const [email, setEmail] = useState("");
+//   const [password, setPassword] = useState("");
+//   const [passwordAgain, setPasswordAgain] = useState("");
+//   const [registered, setRegistered] = useState(false);
+//   const [firstName, setFirstName] = useState("");
+//   const [lastName, setLastName] = useState("");
+
+//   const register = () => {
+//     if (password.length > 0 && password === passwordAgain) {
+//       console.log("reg")
+//       context.register(email, password, firstName, lastName);
+//       setRegistered(true);
+//     }
+//   }
+
+//  // const { from } = props.location.state || { from: { pathname: "/" } };
+
+//   if (registered === true) {
+//    return <Navigate to="./home" />;
+//   }
+
+//   return (
+//     <>
+//       <h2>SignUp page</h2>
+//       <p>You must register an  username and password to log in </p>
+//       <input value={email} placeholder="email" onChange={e => {
+//         setEmail(e.target.value);
+//       }}></input><br />
+//       <input value={firstName} placeholder="first name" onChange={e => {
+//         setFirstName(e.target.value);
+//       }}></input><br />
+//       <input value={lastName} placeholder="last name" onChange={e => {
+//         setLastName(e.target.value);
+//       }}></input><br />
+//       <input value={password} type="password" placeholder="password" onChange={e => {
+//         setPassword(e.target.value);
+//       }}></input><br />
+//       <input value={passwordAgain} type="password" placeholder="password again" onChange={e => {
+//         setPasswordAgain(e.target.value);
+//       }}></input><br />
+//       {/* Login web form  */}
+//       <button onClick={register}>Register</button>
+//     </>
+//   );
+// };
+
+// export default SignUpPage;
+
+
+
+
+
+import { useState, useContext } from 'react';
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -15,6 +72,7 @@ import styles from '../../reviewForm/styles';
 import { IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from '../../../contexts/authContext';
 
 export default function SignUp() {
   const [loading, setLoading] = useState(false)
@@ -22,6 +80,7 @@ export default function SignUp() {
   const [errorMessage, setErrorMessage] = useState("")
   const [errorHappened, setErrorHappened] = useState(false)
   const navigate = useNavigate();
+  const context = useContext(AuthContext)
 
   const handleSnackClose = async (event) => {
     setOpen(false);
@@ -37,43 +96,18 @@ export default function SignUp() {
 
     const formData = new FormData(event.currentTarget);
 
-    // const { data: validateEmail} = await supabase
-    //   .from('profiles')
-    //   .select()
-    //   .eq('email', formData.get("email"))
-
-    //   if(validateEmail.length > 0) {
-    //     setErrorMessage("The Email entered already exists");
-    //     setErrorHappened(true);
-    //   }else{
-    //     handleSubmit(formData)
-    //   }
-  }
-
-  const handleSubmit = async (formData) => {
-
-    const { data, error } = await supabase.auth.signUp(
-      {
-        email: formData.get("email"),
-        password: formData.get("password"),
-        options: {
-          data: {
-            firstName: formData.get("firstName"),
-            lastName: formData.get("lastName")
-          }
-        }
+    if (formData.get("password").length > 0 && formData.get("password") === formData.get("passwordAgain")) {
+      const result = await context.register(formData.get("email"), formData.get("password"), formData.get("firstName"), formData.get("lastName"));
+      if (result.code === 201) {
+        navigate(<HomePage />)
+        setOpen(true)
+      } else {
+        setErrorHappened(true)
+        setErrorMessage(result)
       }
-    // )
-      
-    if (error) {
-      setErrorHappened(true)
-      setErrorMessage(error.message)
-    } else {
-      setOpen(true)
+      setLoading(false)
     }
-    setLoading(false)
   }
-
 
   return (
     <Box
@@ -81,7 +115,7 @@ export default function SignUp() {
         marginTop: 8,
         display: "flex",
         flexDirection: "column",
-        alignItems: "center",        
+        alignItems: "center",
       }}
     >
       <Snackbar
@@ -136,7 +170,7 @@ export default function SignUp() {
       </Typography>
       <Box component="form" onSubmit={validateSubmit} noValidate sx={{ mt: 1 }}>
         <Grid container direction={"row"}>
-          <Grid item xs={6} sx={{ mr: 0}}>
+          <Grid item xs={6} sx={{ mr: 0 }}>
             <TextField
               margin="normal"
               required
@@ -178,6 +212,16 @@ export default function SignUp() {
             label="Password"
             type="password"
             id="password"
+            autoComplete="current-password"
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="passwordAgain"
+            label="Password Again"
+            type="password"
+            id="passwordAgain"
             autoComplete="current-password"
           />
           <Button

@@ -1,7 +1,7 @@
 import React from "react";
 import { useQuery } from "react-query";
 import PageTemplate from '../components/movies/templateMovieListPage'
-import { getMoviesNowPlaying } from "../api/tmdb-api";
+import { getMoviesNowPlaying } from "../api/movie-api";
 import AddToPlaylistIcon from '../components/cardIcons/addToPlaylist';
 import Spinner from "../components/spinner";
 import useFiltering from "../hooks/useFiltering";
@@ -60,7 +60,7 @@ const MoviesNowPlayingPage = (props) => {
   return (
     <>
     <PageTemplate
-      title='Upcoming Movies'
+      title='Now Playing'
       movies={displayedMovies}
       actionFav={(movie) => {
         return <AddToFavouritesIcon movie={movie} />

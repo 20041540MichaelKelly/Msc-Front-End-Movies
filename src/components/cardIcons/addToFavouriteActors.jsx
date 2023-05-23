@@ -1,14 +1,16 @@
 import React, { useContext } from "react";
-import { ActorsContext } from "../../contexts/actorsContext";
+import { AuthContext } from '../../contexts/authContext';
 import IconButton from "@mui/material/IconButton";
 import AddReactionIcon from '@mui/icons-material/AddReaction';
 
 const AddToFavouriteActorsIcon = ({ actor }) => {
-  const context = useContext(ActorsContext);
+  const context = useContext(AuthContext);
+ 
+
 
   const onUserSelect = (e) => {
     e.preventDefault();
-    context.addToFavouriteActors(actor);
+    context.addFavouritePeople(actor);
   };
   
   return (

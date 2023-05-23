@@ -2,7 +2,7 @@ import React from "react";
 import TvShowListPage from "../components/tvshows/templateTvShowListPage";
 import { useQuery } from "react-query";
 import Spinner from "../components/spinner";
-import { getTvShows } from "../api/tmdb-api";
+import { getTvShows } from "../api/movie-api";
 import useFiltering from "../hooks/useFiltering";
 import AddToFavouritesIcon from '../components/cardIcons/addToFavouriteTvShows';
 import AddToPlaylistIcon from '../components/cardIcons/addToTvShowPlaylist';
