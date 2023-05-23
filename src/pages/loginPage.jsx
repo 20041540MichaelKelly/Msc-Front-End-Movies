@@ -50,7 +50,7 @@ export default function Auth() {
 
     const result = await context.authenticate(formData.get("email"), formData.get("password"))
 
-    if (result.code === 200) {
+    if (result) {
       navigate(<HomePage />)
     } else {
       setErrorMessage(result.message)
