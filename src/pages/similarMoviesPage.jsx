@@ -2,7 +2,7 @@ import React from "react";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import PageTemplate from '../components/movies/templateMovieListPage'
-import { getSimilarMovies } from "../api/tmdb-api";
+import { getSimilarMovies } from "../api/movie-api";
 import AddToPlaylistIcon from '../components/cardIcons/addToPlaylist';
 import Spinner from "../components/spinner";
 import useFiltering from "../hooks/useFiltering";

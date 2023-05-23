@@ -2,18 +2,20 @@ import React, { useContext } from "react";
 import PageTemplate from "../components/movies/templateMovieListPage";
 import { MoviesContext } from "../contexts/moviesContext";
 import { useQueries } from "react-query";
-import { getMovie } from "../api/tmdb-api";
+import { getFavourites, getMovie } from "../api/movie-api";
 import Spinner from "../components/spinner";
 import useFiltering from "../hooks/useFiltering";
 import MovieFilterUI, { titleFilter } from "../components/movies/movieFilterUI";
 import RemoveFromFavourites from "../components/cardIcons/removeFromFavourites";
 import WriteReview from "../components/cardIcons/writeReview";
+import { useQuery } from "react-query";
 
 const titleFiltering = {
   name: "title",
   value: "",
   condition: titleFilter,
 };
+
 export const genreFiltering = {
   name: "genre",
   value: "0",
@@ -26,16 +28,19 @@ export const genreFiltering = {
   },
 };
 
+// const { data, error, isLoading, isError } = useQuery("discover", getFavourites);
+
+
 const FavouriteMoviesPage = () => {
-  const { favourites: movieIds } = useContext(MoviesContext);
-  const { filterValues, setFilterValues, filterFunction } = useFiltering(
-    [],
-    [titleFiltering, genreFiltering]
-  );
+  //const { favourites: movieIds } = useContext(MoviesContext);
+  // const { filterValues, setFilterValues, filterFunction } = useFiltering(
+  //   [],
+  //   [titleFiltering, genreFiltering]
+  // );
 
   // Create an array of queries and run them in parallel.
   const favouriteMovieQueries = useQueries(
-    movieIds.map((movieId) => {
+    data.map((movieId) => {
       return {
         queryKey: ["movie", { id: movieId }],
         queryFn: getMovie,

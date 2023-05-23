@@ -2,7 +2,7 @@ import React from "react";
 import PageTemplate from "../components/actors/templateActorListPage";
 import { useQuery } from "react-query";
 import Spinner from "../components/spinner";
-import { getActors } from "../api/tmdb-api";
+import { getActors } from "../api/movie-api";
 import useFiltering from "../hooks/useFiltering";
 import { useParams } from "react-router-dom";
 import Pagination from "../components/pagination";

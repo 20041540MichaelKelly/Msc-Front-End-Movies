@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
-import { TvShowContext } from "../../contexts/tvShowContext";
+import { AuthContext } from '../../contexts/authContext';
 import IconButton from "@mui/material/IconButton";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 
 const AddToFavouriteTvShowsIcon = ({ tvShow }) => {
-  const context = useContext(TvShowContext);
+  const context = useContext(AuthContext)
 
   const onUserSelect = (e) => {
     e.preventDefault();

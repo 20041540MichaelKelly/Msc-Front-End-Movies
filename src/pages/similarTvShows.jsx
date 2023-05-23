@@ -2,7 +2,7 @@ import React from "react";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import PageTemplate from '../components/tvshows/templateTvShowListPage'
-import { getSimilarTvShows } from "../api/tmdb-api";
+import { getSimilarTvShows } from "../api/movie-api";
 import AddToPlaylistIcon from '../components/cardIcons/addToPlaylist';
 import AddToFavouritesIcon from '../components/cardIcons/addToFavourites';
 import Spinner from "../components/spinner";

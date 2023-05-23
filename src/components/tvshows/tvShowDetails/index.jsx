@@ -9,7 +9,7 @@ import { useQuery } from "react-query";
 import NavigationIcon from "@mui/icons-material/Navigation";
 import Fab from "@mui/material/Fab";
 import Drawer from "@mui/material/Drawer";
-import { getTvShowAggregateCredits } from "../../../api/tmdb-api";
+import { getTvShowAggregateCredits } from "../../../api/movie-api";
 import Spinner from '../../spinner';
 import { Link } from "react-router-dom";
 import ImageList from "@mui/material/ImageList";
