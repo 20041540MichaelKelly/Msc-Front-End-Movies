@@ -15,6 +15,7 @@ export const signup = (email, password, firstName, lastName) => {
     method: 'post',
     body: JSON.stringify({ email: email, password: password, firstName: firstName, lastName: lastName })
   }).then(res => res.json())
+                 
 };
 
 export const login = (email, password) => {
@@ -475,18 +476,19 @@ export const getSimilarTvShows = (args) => {
     });
 };
 
-// export const getTvGenres = async () => {
-//   return fetch(
-//     "https://api.themoviedb.org/3/genre/tv/list?api_key=" +
-//     import.meta.env.VITE_TMDB_KEY +
-//     "&language=en-US"
-//   ).then((response) => {
-//     if (!response.ok) {
-//       throw new Error(response.json().message);
-//     }
-//     return response.json();
-//   })
-//     .catch((error) => {
-//       throw error
-//     });
-// };
+export const getTvGenres = async () => {
+  return fetch(
+    `/api/genre/tv/list`, {
+    headers: {
+      'Authorization': window.localStorage.getItem('token')
+    }
+  }).then((response) => {
+    if (!response.ok) {
+      throw new Error(response.json().message);
+    }
+    return response.json();
+  })
+    .catch((error) => {
+      throw error
+    });
+};

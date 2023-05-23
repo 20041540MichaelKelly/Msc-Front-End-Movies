@@ -9,6 +9,7 @@ const AuthContextProvider = (props) => {
   const [authToken, setAuthToken] = useState(existingToken);
   const [email, setEmail] = useState("");
   const [userId, setUserId] = useState("");
+  const [favourites, setFavourites] = useState([])
 
 
   //Function to put JWT token in local storage.
@@ -26,12 +27,14 @@ const AuthContextProvider = (props) => {
       setEmail(email);
       setUserId(result.userId)
     }
+    return result
   };
 
   const register = async (email, password, firstName, lastName) => {
     const result = await signup(email, password, firstName,lastName);
+
     console.log(result.code);
-    return (result.code == 201) ? true : false;
+    return (result.code == 201) ? true : result;
   };
 
   const getUserIdByEmail = async (email) => {
@@ -49,6 +52,7 @@ const AuthContextProvider = (props) => {
   const getFavouriteMovie = async () => {
     const result = await getFavourites(userId);
     console.log(result.code);
+    setFavourites(result)
     return (result.code == 201) ? true : false;
   };
 
@@ -81,7 +85,8 @@ const AuthContextProvider = (props) => {
         addFavouritePeople,
         getFavouriteMovie,
         email,
-        userId
+        userId,
+        favourites
       }}
     >
       {props.children}
