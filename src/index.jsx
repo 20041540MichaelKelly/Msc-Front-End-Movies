@@ -57,7 +57,7 @@ const App = () => {
                   <Route path="/signup" element={<SignUp />} />
                   <Route path="/login" element={<Login />} />
                   <Route element={<AuthHeader />}>
-                    {/* <Route element={<PrivateRoute />  }> */}
+                  {/* <Route element={<PrivateRoute />  }> */}
                     <Route path="/update" element={<UpdateUser />} />
                     <Route path="/tv/favourites" element={<FavouriteTvShowPage />} />
                     <Route path="/tv/playlist" element={<TvShowPlaylistPage />} />
@@ -67,18 +67,13 @@ const App = () => {
                     <Route path="/tv/popular/page/:page" element={<TvShowPage />} />
                     <Route path="/person/favourites" element={<FavouriteActorsPage />} />
                     <Route path="/person/:id" element={<ActorDetailsPage />} />
-                    <Route path="/person/:id" element={
-                      <PrivateRoute>
-                        <Route path="/person/:id" element={<ActorDetailsPage />} />
-                      </PrivateRoute>}
-                    />
                     <Route path="/person/popular" element={<ActorsPage />} />
                     <Route path="/person/popular/page/:page" element={<ActorsPage />} />
                     <Route path="/reviews/form/:id" element={<AddMovieReviewPage />} />
                     <Route path="/reviews/:id" element={<MovieReviewPage />} />
                     <Route path="/movies/fantasy/:id" element={<FantasyMovieDetailsPage />} />
                     <Route path="/movies/fantasy" element={<DisplayFantasyMoviePage />} />
-                    <Route path="/movies/createfantasy" element={<FantasyMoviePage />} />
+                    <Route path="/movies/createfantasy"element={<FantasyMoviePage />}/>
                     <Route path="/movies/:id/similar" element={<SimilarMoviesPage />} />
                     <Route path="/movies/playing" element={<MoviesNowPlayingPage />} />
                     <Route path="/movies/playing/page/:page" element={<MoviesNowPlayingPage />} />
@@ -88,19 +83,14 @@ const App = () => {
                     <Route path="/movies/upcoming/page/:page" element={<UpcomingMoviesPage />} />
                     <Route path="/movies/popular" element={<MostPopularMoviesPage />} />
                     <Route path="/movies/popular/page/:page" element={<MostPopularMoviesPage />} />
-                    <Route exact path="/" element={<HomePage />} />
+                    <Route exact path="/home" element={<HomePage />} />
                     <Route path="*" element={<Navigate to="/" />} />
-                    <Route path="/movies/:id" element={
-                      <PrivateRoute>
-                        <MoviePage />
-                      </PrivateRoute>}
-                    />
                     <Route path="/movies/:id" element={<MoviePage />} />
                     {/* <Route path="/movies/page/:page" element={<HomePage />} /> */}
                     <Route path="*" element={<Navigate to="/" />} />
                     <Route path="#" element={<Navigate to="/" />} />
-                  </Route>
                   {/* </Route> */}
+                  </Route>
                 </Routes>
               </TvShowContextProvider>
             </ActorsContextProvider>

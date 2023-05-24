@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
@@ -17,6 +17,7 @@ import PortraitIcon from '@mui/icons-material/Portrait';
 import LiveTvIcon from '@mui/icons-material/LiveTv';
 import HomeIcon from '@mui/icons-material/Home';
 import LogoutIcon from '@mui/icons-material/Logout';
+import { AuthContext } from "../../contexts/authContext";
 
 
 
@@ -39,6 +40,7 @@ const SiteHeader = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [tvAnchorEl, setTvAnchorEl] = useState(null);
   const [movieAnchorEl, setMovieAnchorEl] = useState(null);
+  const context = useContext(AuthContext);
 
   const open = Boolean(anchorEl);
   const openMovie = Boolean(movieAnchorEl);
@@ -245,6 +247,7 @@ const SiteHeader = () => {
               <IconButton
                 key="Sign Out"
                 sx={{color:"white"}}
+                onClick={()=> context.signout()}
                  >
                 <LogoutIcon />Sign Out</IconButton>
             </>
