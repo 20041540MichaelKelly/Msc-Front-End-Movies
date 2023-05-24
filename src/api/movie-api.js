@@ -15,13 +15,14 @@ export const signup = (email, password, firstName, lastName) => {
     method: 'post',
     body: JSON.stringify({ email: email, password: password, firstName: firstName, lastName: lastName })
   }).then(res => res.json())
-                 
+
 };
 
 export const login = (email, password) => {
   return fetch('/api/accounts/security/token', {
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
     },
     method: 'post',
     body: JSON.stringify({ email: email, password: password })
@@ -267,6 +268,29 @@ export const getSimilarMovies = (args) => {
       throw error
     });
 };
+/***************Fantasy Movies */
+export const addFantasyMovie = (title, time, genres, productionCompnay, overview) => {
+  return fetch('/api/fantasy', {
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    method: 'post',
+    body: JSON.stringify({ title: title, time: time, genres: genres, productionCompany: productionCompnay, overView: overview })
+  }).then(res => res.json())
+
+};
+
+export const getFantasyMovie = (args) => {
+  const [, idPart] = args.queryKey;
+  const { id } = idPart;
+  return fetch(
+    `/api/fantasy/${id}`, {
+    headers: {
+      'Authorization': window.localStorage.getItem('token')
+    }
+  }
+  ).then((res) => res.json());
+};
 
 /**
  * ***********People*********************************
@@ -437,25 +461,25 @@ export const getTvShowCredits = (args) => {
 
 export const getTvShowAggregateCredits = (args) => {
   const [, idPart] = args.queryKey;
-    const { id } = idPart;
-    return fetch(
-      `/api/tv/${id}/aggregate_credits`, {
-      headers: {
-        'Authorization': window.localStorage.getItem('token')
-      }
+  const { id } = idPart;
+  return fetch(
+    `/api/tv/${id}/aggregate_credits`, {
+    headers: {
+      'Authorization': window.localStorage.getItem('token')
     }
-    ).then( (response) => {
-      if (!response.ok) {
-        throw new Error(response.json().message);
-      }
-      return response.json();
-  
-    })
+  }
+  ).then((response) => {
+    if (!response.ok) {
+      throw new Error(response.json().message);
+    }
+    return response.json();
+
+  })
     .catch((error) => {
       throw error
-   });
-  };
- 
+    });
+};
+
 //todo
 export const getSimilarTvShows = (args) => {
   const [, idPart] = args.queryKey;

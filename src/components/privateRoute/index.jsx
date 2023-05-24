@@ -1,8 +1,3 @@
-// import React from "react";
-// import LoginPage from '../../pages/loginPage';
-// import isLoggedIn from "../../hooks/isLoggedIn";
-// import ShowSiteHeader from "../showSiteHeader";
-
 import React, { useContext } from "react";
 import { Navigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/authContext"

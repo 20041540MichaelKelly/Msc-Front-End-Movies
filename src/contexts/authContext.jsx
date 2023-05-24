@@ -1,5 +1,5 @@
 import React, { useState, createContext } from "react";
-import { login, signup, addFavourite, addFavouritePerson, addFavouriteTvShow, getUserByEmail, getFavourites } from "../api/movie-api";
+import { login, signup, addFantasyMovie, addFavourite, addFavouritePerson, addFavouriteTvShow, getUserByEmail, getFavourites } from "../api/movie-api";
 
 export const AuthContext = createContext(null);
 
@@ -17,14 +17,17 @@ const AuthContextProvider = (props) => {
     localStorage.setItem("token", data);
     setAuthToken(data);
   }
+{
+  
+}
 
-  const authenticate = async (email, password) => {
-    const result = await login(email, password);
+  const authenticate = async (email2, password) => {
+    const result = await login(email2, password);
 
     if (result.token) {
       setToken(result.token)
       setIsAuthenticated(true);
-      setEmail(email);
+      setEmail(email2);
       setUserId(result.userId)
     }
     return result
@@ -41,6 +44,11 @@ const AuthContextProvider = (props) => {
     const result = await getUserByEmail(email);
     console.log(result.code);
     return (result.code == 201) ? true : false;
+  };
+
+  const addFantasyMovies = async (title, time, genres, productionCompany, overView) => {
+    const result = await addFantasyMovie(title, time, genres, productionCompany, overView);
+    return result
   };
 
   const addFavouriteMovie = async (movieId) => {
@@ -69,7 +77,8 @@ const AuthContextProvider = (props) => {
   };
 
   const signout = () => {
-    setTimeout(() => setIsAuthenticated(false), 100);
+    setIsAuthenticated(false)
+    //setTimeout(() => setIsAuthenticated(false), 100);
   }
 
   return (
@@ -84,6 +93,7 @@ const AuthContextProvider = (props) => {
         addFavouriteMovie,
         addFavouritePeople,
         getFavouriteMovie,
+        addFantasyMovies,
         email,
         userId,
         favourites

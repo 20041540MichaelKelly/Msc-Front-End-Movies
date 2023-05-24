@@ -71,8 +71,10 @@ import Snackbar from "@mui/material/Snackbar";
 import styles from '../../reviewForm/styles';
 import { IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Navigate } from 'react-router'
 import { AuthContext } from '../../../contexts/authContext';
+import HomePage from '../../../pages/homePage';
+import { GoTrueAdminApi } from '@supabase/supabase-js';
 
 export default function SignUp() {
   const [loading, setLoading] = useState(false)
@@ -84,7 +86,7 @@ export default function SignUp() {
 
   const handleSnackClose = async (event) => {
     setOpen(false);
-    navigate("/");
+    navigate('./homepage')
   }
 
   const handleErrorClose = async (event) => {
@@ -98,12 +100,13 @@ export default function SignUp() {
 
     if (formData.get("password").length > 0 && formData.get("password") === formData.get("passwordAgain")) {
       const result = await context.register(formData.get("email"), formData.get("password"), formData.get("firstName"), formData.get("lastName"));
-      if (result.code === 201) {
-        navigate(<HomePage />)
-        setOpen(true)
-      } else {
+      setLoading(true)
+      if (result.error) {
         setErrorHappened(true)
-        setErrorMessage(result)
+        setErrorMessage(result.error)
+      } else {
+        navigate('/home', { replace: true });
+        setOpen(true);
       }
       setLoading(false)
     }

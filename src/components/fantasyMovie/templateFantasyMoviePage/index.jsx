@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 // import { supabase } from '../../../supabaseClient';
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -22,6 +22,7 @@ import styles from '../../reviewForm/styles';
 import { IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from '../../../contexts/authContext';
 
 export default function TemplateFantasyMoviePage() {
   const [date, setDate] = useState(new Date())
@@ -30,6 +31,7 @@ export default function TemplateFantasyMoviePage() {
   const [errorHappened, setErrorHappened] = useState(false)
   const [open,setOpen] = useState(false)
   const navigate = useNavigate();
+  const context = useContext(AuthContext)
 
   const genres = ["comedy", "horror", "action", "drama", "fantasy", "Romance", "thriller"]
 
@@ -42,25 +44,6 @@ export default function TemplateFantasyMoviePage() {
     setErrorHappened(false);
   }
 
-
-  const handleImageUpload = async (event) => {
-    event.preventDefault()
-
-    setImageUrl(event.target.value);
-    const avatarFile = event.target.files[0]
-    const { error: uploadError } = supabase
-      .storage
-      .from('images')
-      .upload(avatarFile.name, avatarFile, {
-        cacheControl: '3600',
-        upsert: false
-      })
-
-    if (uploadError) {
-      throw uploadError;
-    }
-  }
-
   const handleDateChange = async (event) => {
     setDate(event.target.value);
 
@@ -70,6 +53,18 @@ export default function TemplateFantasyMoviePage() {
     event.preventDefault()
 
     const formData = new FormData(event.currentTarget);
+
+    if (formData.get("title").length > 0 && formData.get("overView").length > 0) {
+      const result = await context.addFantasyMovies(formData.get("title"), formData.get("time"), formData.get("genres"), formData.get("productionCompany"), formData.get("overView"));
+      if (result.error) {
+        setErrorHappened(true)
+        setErrorMessage(result.error)
+      } else {
+        setOpen(true);
+
+        //navigate('/', { replace: true });
+      }
+    }
 
     // const { error, loading } = await supabase.from("fantasy_movies")
     //   .insert(
@@ -85,12 +80,12 @@ export default function TemplateFantasyMoviePage() {
     //   )
 
 
-    if (error) {
-      setErrorMessage(error.message)
-      setErrorHappened(true)
-    } else {
-      setOpen(true)
-    }
+    // if (error) {
+    //   setErrorMessage(error.message)
+    //   setErrorHappened(true)
+    // } else {
+    //   setOpen(true)
+    // }
   }
 
   return (
@@ -171,9 +166,9 @@ export default function TemplateFantasyMoviePage() {
             <Grid item xs={12}>
 
               <TextField
-                id="overview"
-                label="Overview"
-                name="overview"
+                id="overView"
+                label="overView"
+                name="overView"
                 fullWidth
                 multiline
                 margin="normal"
@@ -209,20 +204,6 @@ export default function TemplateFantasyMoviePage() {
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DatePicker fullwidth onChange={handleDateChange} />
               </LocalizationProvider>
-            </Grid>
-            <Grid item xs={12}>
-              <input
-                accept="image/*"
-                id="raised-button-file"
-                name="files"
-                type="file"
-                onChange={handleImageUpload}
-              />
-              <label htmlFor="raised-button-file">
-                <Button component="span" variant="outlined" startIcon={<UploadIcon />} >
-                  Upload Image
-                </Button>
-              </label>
             </Grid>
             <Grid item xs={12}>
               <Typography component="h5" fontWeight='bold' >Genres</Typography>
