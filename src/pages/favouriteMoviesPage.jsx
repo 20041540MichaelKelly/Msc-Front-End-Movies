@@ -2,13 +2,14 @@ import React, { useContext } from "react";
 import PageTemplate from "../components/movies/templateMovieListPage";
 import { MoviesContext } from "../contexts/moviesContext";
 import { useQueries } from "react-query";
-import { getFavourites, getMovie } from "../api/movie-api";
+import { getFantasyMovie, getFavourites, getMovie } from "../api/movie-api";
 import Spinner from "../components/spinner";
 import useFiltering from "../hooks/useFiltering";
 import MovieFilterUI, { titleFilter } from "../components/movies/movieFilterUI";
 import RemoveFromFavourites from "../components/cardIcons/removeFromFavourites";
 import WriteReview from "../components/cardIcons/writeReview";
 import { useQuery } from "react-query";
+import { AuthContext } from "../contexts/authContext";
 
 const titleFiltering = {
   name: "title",
@@ -28,15 +29,18 @@ export const genreFiltering = {
   },
 };
 
-// const { data, error, isLoading, isError } = useQuery("discover", getFavourites);
 
 
 const FavouriteMoviesPage = () => {
-  //const { favourites: movieIds } = useContext(MoviesContext);
-  // const { filterValues, setFilterValues, filterFunction } = useFiltering(
-  //   [],
-  //   [titleFiltering, genreFiltering]
-  // );
+  const { favourites: movieIds } = useContext(MoviesContext);
+  const { filterValues, setFilterValues, filterFunction } = useFiltering(
+    [],
+    [titleFiltering, genreFiltering]
+  );
+  const context = useContext(AuthContext)
+
+  const  data = context.getFavouriteMovie()
+
 
   // Create an array of queries and run them in parallel.
   const favouriteMovieQueries = useQueries(
@@ -48,7 +52,7 @@ const FavouriteMoviesPage = () => {
     })
   );
   // Check if any of the parallel queries is still loading.
-  const isLoading = favouriteMovieQueries.find((m) => m.isLoading === true);
+ //isLoading = favouriteMovieQueries.find((m) => m.isLoading === true);
 
   if (isLoading) {
     return <Spinner />;
